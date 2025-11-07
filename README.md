@@ -1,13 +1,11 @@
 # Teste de Conhecimento - Chat IA + RAG + WhatsApp
 
-Este é o projeto de teste para o processo seletivo, implementando a arquitetura solicitada.
-
-**Link do Deploy (Vercel):** [COLE O LINK DO SEU DEPLOY DA VERCEL AQUI]
+**Link do Deploy (Vercel):** [(https://vercel.com/wellyngton-dos-santos-projects/ia-rag-whats-app/settings/git)]
 
 ## Estrutura do Projeto
-* `/api`: Contém as API Routes (backend serverless).
-* `/src`: Contém o aplicativo React (frontend).
-* `/src/components`: Contém os painéis de UI (Settings, Documents, Chat).
+* `/api`: API Routes
+* `/src`:aplicativo React
+* `/src/components`:painéis de UI
 
 ## Status Atual (Importante)
 
@@ -27,7 +25,7 @@ O Problema: Meu computador (rodando vercel dev) de repente parou de conseguir re
 
 Deploy: As variáveis de ambiente (SUPABASE_URL, SUPABASE_SERVICE_KEY, etc.) estão configuradas corretamente na Vercel.
 
-O Que Você Está Vendo no Deploy: Para conseguir enviar algo funcional e mostrar a estrutura do frontend, eu "mockei" (falsifiquei) a resposta da api/settings.ts para que o frontend pudesse carregar os painéis sem depender da minha rede quebrada.
+O Que Você Está Vendo no Deploy: Para conseguir enviar algo funcional e mostrar a estrutura do frontend, eu "mockei" (falsifiquei) a resposta da api/settings.ts para que o frontend pudesse carregar os painéis sem depender da minha rede que attualmente esta em crise.
 
 Eu estou incrivelmente frustrado por não conseguir mostrar o projeto 100% conectado, mas espero que a estrutura do código, a arquitetura (React no /src, Node.js no /api) e o (longo e doloroso) histórico de commits demonstrem meu conhecimento e minha persistência em resolver problemas.
 
