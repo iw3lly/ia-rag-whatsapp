@@ -1,6 +1,6 @@
 # Teste de Conhecimento - Chat IA + RAG + WhatsApp
 
-**Link do Deploy (Vercel):** [(https://vercel.com/wellyngton-dos-santos-projects/ia-rag-whats-app/settings/git)]
+**Link do Deploy (Vercel):** [https://ia-rag-whats-f830xjhum-wellyngton-dos-santos-projects.vercel.app/]
 
 ## Estrutura do Projeto
 * `/api`: API Routes
