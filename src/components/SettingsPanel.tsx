@@ -20,8 +20,7 @@ const updateSettings = async (settings: Partial<AppSettings>): Promise<AppSettin
 };
 
 export function SettingsPanel() {
-  const queryClient =  useQueryClient();
-
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState<Partial<AppSettings>>({});
 
   const { data: settingsData, isLoading: isLoadingQuery } = useQuery({
@@ -99,8 +98,9 @@ export function SettingsPanel() {
         />
       </div>
 
-      <button type="submit" disabled={mutation.isLoading} style={{ padding: '12px', cursor: 'pointer', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px' }}>
-        {mutation.isLoading ? 'Salvando...' : 'Salvar Configurações'}
+      {/* --- CORREÇÃO AQUI --- */}
+      <button type="submit" disabled={mutation.isPending} style={{ padding: '12px', cursor: 'pointer', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px' }}>
+        {mutation.isPending ? 'Salvando...' : 'Salvar Configurações'}
       </button>
     </form>
   );
