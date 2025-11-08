@@ -31,8 +31,8 @@ export function DocumentsPanel() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const { data: documents, isLoading: isLoadingDocs } = useQuery({
-    queryKey: ['ragDocuments'], 
-    queryFn: fetchDocuments 
+    queryKey: ['ragDocuments'],
+    queryFn: fetchDocuments,
   });
 
   const deleteMutation = useMutation({
@@ -82,12 +82,24 @@ export function DocumentsPanel() {
   return (
     <div style={{ maxWidth: '800px', margin: '20px auto' }}>
       <h2>📚 Sistema de Documentos (RAG)</h2>
-      
+
       {/* Formulário de Upload */}
-      <form onSubmit={handleSubmit} style={{ marginBottom: '20px', padding: '15px', border: '1px solid #333', borderRadius: '8px' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          marginBottom: '20px',
+          padding: '15px',
+          border: '1px solid #333',
+          borderRadius: '8px',
+        }}
+      >
         <h3>1. Fazer Upload de Documento (PDF, TXT, MD)</h3>
         <input type="file" onChange={handleFileChange} accept=".pdf,.txt,.md" />
-        <button type="submit" disabled={!selectedFile || uploadMutation.isPending} style={{ marginLeft: '10px' }}>
+        <button
+          type="submit"
+          disabled={!selectedFile || uploadMutation.isPending}
+          style={{ marginLeft: '10px' }}
+        >
           {uploadMutation.isPending ? 'Enviando e Processando...' : 'Enviar para RAG'}
         </button>
       </form>
@@ -101,7 +113,9 @@ export function DocumentsPanel() {
           <thead>
             <tr style={{ background: '#333' }}>
               <th style={{ padding: '8px', border: '1px solid #555', textAlign: 'left' }}>Nome</th>
-              <th style={{ padding: '8px', border: '1px solid #555', textAlign: 'left' }}>Status</th>
+              <th style={{ padding: '8px', border: '1px solid #555', textAlign: 'left' }}>
+                Status
+              </th>
               <th style={{ padding: '8px', border: '1px solid #555' }}>Ações</th>
             </tr>
           </thead>
@@ -109,11 +123,22 @@ export function DocumentsPanel() {
             {documents?.map((doc) => (
               <tr key={doc.id}>
                 <td style={{ padding: '8px', border: '1px solid #555' }}>{doc.file_name}</td>
-                <td style={{ padding: '8px', border: '1px solid #555', color: doc.status === 'READY' ? 'lightgreen' : doc.status === 'ERROR' ? 'red' : 'yellow' }}>
+                <td
+                  style={{
+                    padding: '8px',
+                    border: '1px solid #555',
+                    color:
+                      doc.status === 'READY'
+                        ? 'lightgreen'
+                        : doc.status === 'ERROR'
+                          ? 'red'
+                          : 'yellow',
+                  }}
+                >
                   **{doc.status}**
                 </td>
                 <td style={{ padding: '8px', border: '1px solid #555', textAlign: 'center' }}>
-                  <button 
+                  <button
                     onClick={() => handleDelete(doc.id)}
                     disabled={deleteMutation.isPending}
                     style={{ color: 'red', background: 'none', border: 'none', cursor: 'pointer' }}

@@ -10,9 +10,9 @@ function App() {
       <hr style={{ margin: '40px 0' }} />
       <SettingsPanel />
       <hr style={{ margin: '40px 0' }} />
-      <DocumentsPanel /> 
+      <DocumentsPanel />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
