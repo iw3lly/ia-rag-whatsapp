@@ -20,7 +20,7 @@ export function TestChat() {
   const [isLoading, setIsLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const TEST_SESSION_ID = '123';
+  const testSessionId = '123';
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -39,7 +39,7 @@ export function TestChat() {
     try {
       const { data } = await axios.post('/api/chat', {
         message: userMessage.content,
-        sessionId: TEST_SESSION_ID,
+        sessionId: testSessionId,
       });
 
       const aiResponse: Message = {
@@ -50,9 +50,8 @@ export function TestChat() {
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error: any) {
       console.error('Chat API Error:', error);
-      const errorMessage =
-        error.response?.data?.error ||
-        'Erro de rede ou na IA. Verifique suas configurações e dependências.';
+      const errorMessage = error.response?.data?.error || 'Erro de rede ou na IA. Chave inválida ou modelo incorreto. Verifique suas configurações.';
+
       const errorMsg: Message = {
         id: Date.now() + 1,
         role: 'assistant',
@@ -65,46 +64,21 @@ export function TestChat() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '0 auto',
-        border: '1px solid #333',
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '60vh',
-      }}
-    >
-      <h2 style={{ padding: '10px', margin: 0, borderBottom: '1px solid #333' }}>
+    <div className="chat-container">
+      <h2 className="chat-header">
         💬 Chat de Teste (Item 4)
       </h2>
 
-      {/* Área de Mensagens */}
-      <div style={{ flexGrow: 1, overflowY: 'auto', padding: '15px' }}>
+      <div className="message-area">
         {messages.map((msg) => (
           <div
             key={msg.id}
-            style={{
-              marginBottom: '10px',
-              display: 'flex',
-              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-            }}
+            className={`message-row ${msg.role === 'user' ? 'user' : 'assistant'}`}
           >
-            <div
-              style={{
-                maxWidth: '70%',
-                padding: '10px',
-                borderRadius: '10px',
-                background: msg.role === 'user' ? '#1E88E5' : '#424242',
-                color: 'white',
-                fontSize: '14px',
-                wordBreak: 'break-word',
-              }}
-            >
+            <div className="message-bubble">
               {msg.content}
               {isLoading && msg.id === messages[messages.length - 1].id && msg.role === 'user' && (
-                <span className="loading-dots">...</span>
+                <span className="loading-dots"></span>
               )}
             </div>
           </div>
@@ -112,10 +86,9 @@ export function TestChat() {
         <div ref={chatEndRef} />
       </div>
 
-      {/* Formulário de Input */}
       <form
         onSubmit={handleSubmit}
-        style={{ borderTop: '1px solid #333', padding: '10px', display: 'flex' }}
+        className="input-form"
       >
         <input
           type="text"
@@ -123,49 +96,16 @@ export function TestChat() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={isLoading ? 'Aguardando resposta...' : 'Digite sua pergunta...'}
           disabled={isLoading}
-          style={{
-            flexGrow: 1,
-            padding: '10px',
-            borderRadius: '5px',
-            border: '1px solid #555',
-            background: '#333',
-            color: 'white',
-          }}
+          className="input-field"
         />
         <button
           type="submit"
           disabled={!input.trim() || isLoading}
-          style={{
-            padding: '10px 15px',
-            marginLeft: '10px',
-            background: '#1E88E5',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
+          className="send-button"
         >
           Enviar
         </button>
       </form>
-
-      {/* Adicionar CSS para o efeito de loading */}
-      <style>{`
-        .loading-dots:after {
-          overflow: hidden;
-          display: inline-block;
-          vertical-align: bottom;
-          -webkit-animation: ellipsis steps(4, end) 900ms infinite;
-          animation: ellipsis steps(4, end) 900ms infinite;
-          content: "\\2026"; 
-          width: 0;
-        }
-        @keyframes ellipsis {
-          to {
-            width: 1.25em;
-          }
-        }
-      `}</style>
     </div>
   );
 }

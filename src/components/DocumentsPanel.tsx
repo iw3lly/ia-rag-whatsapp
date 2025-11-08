@@ -83,7 +83,7 @@ export function DocumentsPanel() {
     <div style={{ maxWidth: '800px', margin: '20px auto' }}>
       <h2>📚 Sistema de Documentos (RAG)</h2>
 
-      {/* Formulário de Upload */}
+      {}
       <form
         onSubmit={handleSubmit}
         style={{
@@ -104,7 +104,7 @@ export function DocumentsPanel() {
         </button>
       </form>
 
-      {/* Lista de Documentos */}
+      {}
       <h3>2. Documentos Carregados</h3>
       {isLoadingDocs ? (
         <p>Carregando lista...</p>
